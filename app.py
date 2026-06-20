@@ -448,7 +448,18 @@ class App(TkinterDnD.Tk):
         super().__init__()
         self.title("Video Screen Capture")
         self.resizable(False, False)
+        self._set_icon()
         self._build()
+
+    def _set_icon(self):
+        import sys, os
+        if getattr(sys, "frozen", False):
+            base = sys._MEIPASS
+        else:
+            base = os.path.dirname(os.path.abspath(__file__))
+        ico = os.path.join(base, "icon.ico")
+        if os.path.exists(ico):
+            self.iconbitmap(ico)
 
     def _build(self):
         nb = ttk.Notebook(self)
